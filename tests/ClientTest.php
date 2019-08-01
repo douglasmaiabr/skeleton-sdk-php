@@ -5,6 +5,7 @@ namespace JustSteveKing\SDK\Tests;
 use JustSteveKing\SDK\Client;
 use League\Container\Container;
 use PHPUnit\Framework\TestCase;
+use JustSteveKing\SDK\Support\Auth;
 use GuzzleHttp\Client as HttpClient;
 
 class ClientTest extends TestCase
@@ -78,6 +79,16 @@ class ClientTest extends TestCase
         $userAgent = 'phpunit-sdk-test';
         $this->client->setUserAgent($userAgent);
         $this->assertEquals($userAgent, $this->client->getUserAgent());
+    }
+
+    /**
+     * Test after construct our client has Auth available
+     * 
+     * @test
+     */
+    public function ClientHasAuth()
+    {
+        $this->assertInstanceOf(Auth::class, $this->client->getAuth());
     }
 
     /**

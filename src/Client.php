@@ -3,6 +3,7 @@
 namespace JustSteveKing\SDK;
 
 use League\Container\Container;
+use JustSteveKing\SDK\Support\Auth;
 use GuzzleHttp\Client as HttpClient;
 
 class Client
@@ -28,6 +29,11 @@ class Client
      * @var array
      */
     protected $resources = [];
+
+    /**
+     * @var Auth
+     */
+    protected $auth;
 
     /**
      * @var HttpClient
@@ -171,12 +177,23 @@ class Client
     }
 
     /**
+     * Get an instance of Auth
+     *
+     * @return Auth
+     */
+    public function getAuth() : Auth
+    {
+        return $this->auth;
+    }
+
+    /**
      * Bootstrap the Client dependencies
      * 
      * @return  void
      */
     protected function boot() : void
     {
+        $this->auth = new Auth;
         $this->guzzle = new HttpClient();
         $this->container = new Container;
     }
