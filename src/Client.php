@@ -2,6 +2,7 @@
 
 namespace JustSteveKing\SDK;
 
+use League\Container\Container;
 use GuzzleHttp\Client as HttpClient;
 
 class Client
@@ -10,6 +11,16 @@ class Client
      * @var String
      */
     protected $url;
+
+    /**
+     * @var HttpClient
+     */
+    protected $guzzle;
+
+    /**
+     * @var Container
+     */
+    protected $container;
 
     /**
      * Create a new instance of our Client
