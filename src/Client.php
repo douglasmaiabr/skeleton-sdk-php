@@ -13,6 +13,11 @@ class Client
     protected $url;
 
     /**
+     * @var array
+     */
+    private $headers = [];
+
+    /**
      * @var HttpClient
      */
     protected $guzzle;
@@ -59,6 +64,41 @@ class Client
     public function getUrl() :? String
     {
         return $this->url;
+    }
+
+    /**
+     * Get an instance of Container
+     *
+     * @return Container
+     */
+    public function getContainer() : Container
+    {
+        return $this->container;
+    }
+
+    /**
+     * Get the Client Headers
+     *
+     * @return array
+     */
+    public function getHeaders() : array
+    {
+        return $this->headers;
+    }
+
+    /**
+     * Set Client Header
+     *
+     * @param   String  $key
+     * @param   String  $value
+     *
+     * @return  $this
+     */
+    public function setHeader(String $key, String $value)
+    {
+        $this->headers[$key] = $value;
+
+        return $this;
     }
 
     /**
