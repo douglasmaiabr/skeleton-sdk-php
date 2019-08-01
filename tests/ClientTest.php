@@ -82,16 +82,6 @@ class ClientTest extends TestCase
     }
 
     /**
-     * Test after construct our client has Auth available
-     * 
-     * @test
-     */
-    public function ClientHasAuth()
-    {
-        $this->assertInstanceOf(Auth::class, $this->client->getAuth());
-    }
-
-    /**
      * Test after construct our client has guzzle available
      * 
      * @test

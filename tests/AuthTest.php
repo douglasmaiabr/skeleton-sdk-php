@@ -21,6 +21,9 @@ class AuthTest extends TestCase
         parent::setUp();
 
         $this->client = new Client($this->initialConfig);
+        
+        $this->client->setAuth('oauth', ['access_token' => '1234567890']);
+
         $this->auth = $this->client->getAuth();
     }
 

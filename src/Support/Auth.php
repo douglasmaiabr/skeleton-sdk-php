@@ -2,6 +2,8 @@
 
 namespace JustSteveKing\SDK\Support;
 
+use JustSteveKing\SDK\Exceptions\Auth\CredentialsException;
+use JustSteveKing\SDK\Exceptions\Auth\AuthenticationException;
 use JustSteveKing\SDK\Exceptions\Auth\InvalidAuthenticationStrategyException;
 
 class Auth
@@ -25,6 +27,35 @@ class Auth
      * @var array
      */
     protected $authOptions;
+
+    /**
+     * Create a new instance of Auth
+     * 
+     * @return  void
+     * @throws  InvalidAuthenticationStrategyException
+     * @throws  AuthenticationException
+     * @throws  CredentialsException
+     */
+    public function __construct(String $strategy, array $options)
+    {
+        if (! in_array($strategy, self::getValidAuthStrategies())) {
+            throw new InvalidAuthenticationStrategyException('Invalid auth strategy set');
+        }
+
+        $this->setAuthStrategy($strategy);
+
+        if ($strategy === self::BASIC) {
+            if (! array_key_exists('username', $options) || ! array_key_exists('token', $options)) {
+                throw new CredentialsException('Please supply `username` and `password` for basic auth.');
+            }
+        } elseif ($strategy === self::OAUTH) {
+            if (! array_key_exists('access_token', $options)) {
+                throw new AuthenticationException('Please supply `access_token` for oauth.');
+            }
+        }
+
+        $this->setAuthOptions($options);
+    }
 
     /**
      * Set the Auth Options

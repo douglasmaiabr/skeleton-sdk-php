@@ -5,6 +5,7 @@ namespace JustSteveKing\SDK;
 use League\Container\Container;
 use JustSteveKing\SDK\Support\Auth;
 use GuzzleHttp\Client as HttpClient;
+use JustSteveKing\SDK\Exceptions\Auth\InvalidAuthenticationStrategyException;
 
 class Client
 {
@@ -187,13 +188,26 @@ class Client
     }
 
     /**
+     * Configure the Auth method
+     *
+     * @param   String  $strategy
+     * @param   array   $options
+     *
+     * @return  void
+     * @throws  InvalidAuthenticationStrategyException
+     */
+    public function setAuth(String $strategy, array $options) : void
+    {
+        $this->auth = new Auth($strategy, $options);
+    }
+
+    /**
      * Bootstrap the Client dependencies
      * 
      * @return  void
      */
     protected function boot() : void
     {
-        $this->auth = new Auth;
         $this->guzzle = new HttpClient();
         $this->container = new Container;
     }
