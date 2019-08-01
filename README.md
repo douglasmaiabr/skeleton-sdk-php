@@ -36,3 +36,9 @@ Or configure after construct:
 $client = new Client();
 $client->setUrl('https://api.domain.com');
 ```
+
+## Testing
+
+```bash
+./vendor/bin/phpunit
+```
