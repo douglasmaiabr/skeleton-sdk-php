@@ -1,0 +1,32 @@
+{
+    "name": "juststeveking/skeleton-sdk-php",
+    "description": "A skeleton SDK to work with your API",
+    "keywords": ["skeleton", "client", "sdk", "boilerplate"],
+    "type": "library",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/JustSteveKing/skeleton-sdk-php/issues",
+        "source": "https://github.com/JustSteveKing/skeleton-sdk-php"
+    },
+    "authors": [
+        {
+            "name": "Steve McDougall",
+            "email": "juststevemcd@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "guzzlehttp/guzzle": "^6.3",
+        "league/container": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "JustSteveKing\\SDK\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
