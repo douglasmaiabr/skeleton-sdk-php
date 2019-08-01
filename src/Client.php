@@ -77,6 +77,16 @@ class Client
     }
 
     /**
+     * Get an instance of HttpClient
+     *
+     * @return HttpClient
+     */
+    public function getGuzzle() : HttpClient
+    {
+        return $this->guzzle;
+    }
+
+    /**
      * Get the Client Headers
      *
      * @return array
