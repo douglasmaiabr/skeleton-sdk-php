@@ -6,7 +6,9 @@ The `skeleton-sdk-php` package is a boilerplate SDK to get started with building
 
 ## Requirements
 
-- PHP 7.3+
+- PHP 7.3
+- guzzlehttp/guzzle
+- league/container
 
 ## Installation
 
