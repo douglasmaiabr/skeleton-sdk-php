@@ -15,7 +15,12 @@ class Client
     /**
      * @var array
      */
-    private $headers = [];
+    protected $headers = [];
+
+    /**
+     * @var array
+     */
+    protected $resources = [];
 
     /**
      * @var HttpClient
@@ -109,6 +114,31 @@ class Client
         $this->headers[$key] = $value;
 
         return $this;
+    }
+
+    /**
+     * Set Resources onto the Container
+     *
+     * @param   array   $resources
+     *
+     * @return  void
+     */
+    public function setResources(array $resources) : void
+    {
+        foreach ($resources as $key => $value) {
+            $this->resources[$key] = $value;
+            $this->container->add($key, $value);
+        }
+    }
+
+    /**
+     * Get Resources on the Container
+     *
+     * @return  array
+     */
+    public function getResources() : array
+    {
+        return $this->resources;
     }
 
     /**

@@ -33,6 +33,28 @@ class ClientTest extends TestCase
     }
 
     /**
+     * Test that I can set Resources on Client
+     * 
+     * @test
+     */
+    public function SetResourcesOnClient()
+    {
+        $this->client->setResources(['key' => 'value']);
+        $this->assertTrue(array_key_exists('key', $this->client->getResources()));
+    }
+
+    /**
+     * Test that I can get Resources from Client
+     * 
+     * @test
+     */
+    public function GetResourcesOnClient()
+    {
+        $this->client->setResources(['key' => 'value']);
+        $this->assertEquals(count($this->client->getResources()), 1);
+    }
+
+    /**
      * Test after construct our client has guzzle available
      * 
      * @test
