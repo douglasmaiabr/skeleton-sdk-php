@@ -1,1 +1,0 @@
-C:37:"PHPUnit\Runner\DefaultTestResultCache":283:{a:2:{s:7:"defects";a:1:{s:7:"Warning";i:6;}s:5:"times";a:4:{s:7:"Warning";d:0.002;s:54:"JustSteveKing\SDK\Tests\ClientTest::SetupConfiguresUrl";d:0.005;s:51:"JustSteveKing\SDK\Tests\ClientTest::ClientHasGuzzle";d:0;s:54:"JustSteveKing\SDK\Tests\ClientTest::ClientHasContainer";d:0;}}}
