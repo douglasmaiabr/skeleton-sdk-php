@@ -2,6 +2,8 @@
 
 namespace JustSteveKing\SDK;
 
+use GuzzleHttp\Client as HttpClient;
+
 class Client
 {
     /**
@@ -23,6 +25,7 @@ class Client
         ], $options);
 
         $this->setUrl($options['url']);
+        $this->boot();
     }
 
     /**
@@ -45,5 +48,16 @@ class Client
     public function getUrl() :? String
     {
         return $this->url;
+    }
+
+    /**
+     * Bootstrap the Client dependencies
+     * 
+     * @return  void
+     */
+    protected function boot() : void
+    {
+        $this->guzzle = new HttpClient();
+        $this->container = new Container;
     }
 }
