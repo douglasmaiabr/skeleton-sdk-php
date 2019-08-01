@@ -7,10 +7,17 @@ use GuzzleHttp\Client as HttpClient;
 
 class Client
 {
+    const VERSION = 'v1.0.0';
+
     /**
      * @var String
      */
     protected $url;
+
+    /**
+     * @var String
+     */
+    protected $userAgent = 'PHP SDK ' . self::VERSION;
 
     /**
      * @var array
@@ -139,6 +146,28 @@ class Client
     public function getResources() : array
     {
         return $this->resources;
+    }
+
+    /**
+     * Return the User Agent String
+     *
+     * @return String
+     */
+    public function getUserAgent() : String
+    {
+        return $this->userAgent;
+    }
+
+    /**
+     * Set the User Agent String
+     *
+     * @param   String  $string
+     *
+     * @return void
+     */
+    public function setUserAgent(String $string) : void
+    {
+        $this->userAgent = $string;
     }
 
     /**

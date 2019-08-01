@@ -55,6 +55,32 @@ class ClientTest extends TestCase
     }
 
     /**
+     * Test that I can get User Agent
+     * 
+     * @test
+     */
+    public function GetUserAgent()
+    {
+        $version = $this->client::VERSION;
+        $this->assertEquals(
+            "PHP SDK {$version}",
+            $this->client->getUserAgent()
+        );
+    }
+
+    /**
+     * Test that I can set User Agent
+     * 
+     * @test
+     */
+    public function SetUserAgent()
+    {
+        $userAgent = 'phpunit-sdk-test';
+        $this->client->setUserAgent($userAgent);
+        $this->assertEquals($userAgent, $this->client->getUserAgent());
+    }
+
+    /**
      * Test after construct our client has guzzle available
      * 
      * @test
