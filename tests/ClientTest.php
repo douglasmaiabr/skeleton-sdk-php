@@ -2,6 +2,7 @@
 
 namespace JustSteveKing\SDK\Tests;
 
+use stdClass;
 use JustSteveKing\SDK\Client;
 use League\Container\Container;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +29,7 @@ class ClientTest extends TestCase
      * 
      * @test
      */
-    public function SetupConfiguresUrl()
+    public function setupConfiguresUrl()
     {
         $this->assertEquals($this->initialConfig['url'], $this->client->getUrl());
     }
@@ -38,7 +39,7 @@ class ClientTest extends TestCase
      * 
      * @test
      */
-    public function SetResourcesOnClient()
+    public function setResourcesOnClient()
     {
         $this->client->setResources(['key' => 'value']);
         $this->assertTrue(array_key_exists('key', $this->client->getResources()));
@@ -49,7 +50,7 @@ class ClientTest extends TestCase
      * 
      * @test
      */
-    public function GetResourcesOnClient()
+    public function getResourcesOnClient()
     {
         $this->client->setResources(['key' => 'value']);
         $this->assertEquals(count($this->client->getResources()), 1);
@@ -60,7 +61,7 @@ class ClientTest extends TestCase
      * 
      * @test
      */
-    public function GetUserAgent()
+    public function getUserAgent()
     {
         $version = $this->client::VERSION;
         $this->assertEquals(
@@ -74,7 +75,7 @@ class ClientTest extends TestCase
      * 
      * @test
      */
-    public function SetUserAgent()
+    public function setUserAgent()
     {
         $userAgent = 'phpunit-sdk-test';
         $this->client->setUserAgent($userAgent);
@@ -82,11 +83,29 @@ class ClientTest extends TestCase
     }
 
     /**
+     * Test that I can set and get User Credentials
+     * 
+     * @test
+     */
+    public function setAndGetUserCredentials()
+    {
+        $credentials = new stdClass();
+        $this->assertInstanceOf(stdClass::class, $credentials);
+        $credentials->token_type = "Bearer";
+        $credentials->expires_in = 1296000;
+        $credentials->access_token = "1234567890";
+        $credentials->refresh_token = "1234567890";
+
+        $this->client->setCredentials($credentials);
+        $this->assertInstanceOf(stdClass::class, $this->client->getCredentials());
+    }
+
+    /**
      * Test after construct our client has guzzle available
      * 
      * @test
      */
-    public function ClientHasGuzzle()
+    public function clientHasGuzzle()
     {
         $this->assertInstanceOf(HttpClient::class, $this->client->getGuzzle());
     }
@@ -96,7 +115,7 @@ class ClientTest extends TestCase
      * 
      * @test
      */
-    public function ClientHasContainer()
+    public function clientHasContainer()
     {
         $this->assertInstanceOf(Container::class, $this->client->getContainer());
     }

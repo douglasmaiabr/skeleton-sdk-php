@@ -37,6 +37,8 @@
     "require-dev": {
         "mockery/mockery": "^1.2",
         "phploc/phploc": "^5.0",
-        "phpunit/phpunit": "^8.2"
+        "phpunit/phpunit": "^8.2",
+        "symfony/var-dumper": "^4.3",
+        "vlucas/phpdotenv": "^3.4"
     }
 }

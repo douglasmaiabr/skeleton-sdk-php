@@ -3,8 +3,10 @@
 namespace JustSteveKing\SDK;
 
 use League\Container\Container;
+use JustSteveKing\SDK\Http\OAuth;
 use JustSteveKing\SDK\Support\Auth;
 use GuzzleHttp\Client as HttpClient;
+use JustSteveKing\SDK\Exceptions\APIResponseException;
 use JustSteveKing\SDK\Exceptions\Auth\InvalidAuthenticationStrategyException;
 
 class Client
@@ -29,7 +31,17 @@ class Client
     /**
      * @var array
      */
+    protected $authParams = [];
+
+    /**
+     * @var array
+     */
     protected $resources = [];
+
+    /**
+     * @var object
+     */
+    protected $credentials;
 
     /**
      * @var Auth
@@ -60,6 +72,7 @@ class Client
         ], $options);
 
         $this->setUrl($options['url']);
+        $this->setAuthParams($options);
         $this->boot();
     }
 
@@ -83,6 +96,28 @@ class Client
     public function getUrl() :? String
     {
         return $this->url;
+    }
+
+    /**
+     * Set our SDK Auth Params
+     * 
+     * @param   array  $params
+     * 
+     * @return  void
+     */
+    public function setAuthParams(array $params) : void
+    {
+        $this->authParams = $params;
+    }
+
+    /**
+     * Get our SDK Auth Params
+     * 
+     * @return  array
+     */
+    public function getAuthParams() : array
+    {
+        return $this->authParams;
     }
 
     /**
@@ -185,6 +220,49 @@ class Client
     public function getAuth() : Auth
     {
         return $this->auth;
+    }
+
+    /**
+     * Preload OAuth
+     *
+     * @return  void
+     * @throws  APIResponseException
+     */
+    public function setOAuth() : void
+    {
+        $response = OAuth::get(
+            new HttpClient(),
+            $this->getUrl(),
+            $this->getAuthParams()
+        );
+
+        $this->setCredentials($response);
+
+        $this->setAuth('oauth', [
+            'access_token' => $this->credentials->access_token
+        ]);
+    }
+
+    /**
+     * Get Auth Credentials
+     * 
+     * @return  null|object
+     */
+    public function getCredentials() :? object
+    {
+        return $this->credentials;
+    }
+
+    /**
+     * Set Auth Credentials
+     * 
+     * @param   object  $credentials
+     * 
+     * @return  void
+     */
+    public function setCredentials(object $credentials) :  void
+    {
+        $this->credentials = $credentials;
     }
 
     /**
