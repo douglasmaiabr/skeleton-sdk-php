@@ -283,6 +283,76 @@ class Client
     }
 
     /**
+     * Set the Auth Parameters manually for username
+     * 
+     * @param   String  $username
+     * 
+     * @return  $this
+     */
+    public function setUsername(String $username)
+    {
+        $this->authParams['username'] = $username;
+
+        return $this;
+    }
+
+    /**
+     * Set the Auth Parameters manually for password
+     * 
+     * @param   String  $password
+     * 
+     * @return  $this
+     */
+    public function setPassword(String $password)
+    {
+        $this->authParams['password'] = $password;
+
+        return $this;
+    }
+
+    /**
+     * Set the Auth Parameters manually for client ID
+     * 
+     * @param   String  $clientID
+     * 
+     * @return  $this
+     */
+    public function setClientID(String $clientID)
+    {
+        $this->authParams['client_id'] = $clientID;
+
+        return $this;
+    }
+
+    /**
+     * Set the Auth Parameters manually for client secret
+     * 
+     * @param   String  $clientSecret
+     * 
+     * @return  $this
+     */
+    public function setClientSecret(String $clientSecret)
+    {
+        $this->authParams['client_secret'] = $clientSecret;
+
+        return $this;
+    }
+
+    /**
+     * Set the Auth Parameters manually for oauth url
+     * 
+     * @param   String  $url
+     * 
+     * @return  $this
+     */
+    public function setOAuthAuthEndpoint(String $url)
+    {
+        $this->authParams['endpoint'] = $url;
+
+        return $this;
+    }
+
+    /**
      * Bootstrap the Client dependencies
      * 
      * @return  void
