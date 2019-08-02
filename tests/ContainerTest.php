@@ -25,7 +25,7 @@ class ContainerTest extends TestCase
      * 
      * @test
      */
-    public function AddClassToContainer()
+    public function addClassToContainer()
     {
         $container = $this->client->getContainer();
         $container->add(\JustSteveKing\SDK\Tests\DummyClass::class);
@@ -37,7 +37,7 @@ class ContainerTest extends TestCase
      * 
      * @test
      */
-    public function AddClassToContainerWithAlias()
+    public function addClassToContainerWithAlias()
     {
         $container = $this->client->getContainer();
         $container->add('dummy', \JustSteveKing\SDK\Tests\DummyClass::class);

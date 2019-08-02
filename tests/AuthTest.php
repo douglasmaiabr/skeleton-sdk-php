@@ -32,7 +32,7 @@ class AuthTest extends TestCase
      * 
      * @test
      */
-    public function SetAndGetAuthStrategy()
+    public function setAndGetAuthStrategy()
     {
         $this->auth->setAuthStrategy('oauth');
         $this->assertEquals('oauth', $this->auth->getAuthStrategy());
@@ -43,7 +43,7 @@ class AuthTest extends TestCase
      * 
      * @test
      */
-    public function SetAndGetAuthOptions()
+    public function setAndGetAuthOptions()
     {
         $options = [
             'username' => 'user@email.com',
