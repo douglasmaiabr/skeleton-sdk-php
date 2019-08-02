@@ -97,6 +97,41 @@ class Auth
     }
 
     /**
+     * Prepare our request for sending
+     *
+     * @param   RequestInterface    $request
+     * @param   array               $requestOptions
+     *
+     * @return  array
+     * @throws  AuthenticationException
+     */
+    public function prepareRequest(RequestInterface $request, array $requestOptions = []) : array
+    {
+        if ($this->authStrategy === self::BASIC) {
+            $user = $this->authOptions['username'];
+            $password = $this->authOptions['password'];
+            $token = base64_encode("{$user}:{$password}");
+            $request = $request->withAddedHeader(
+                'Authorization',
+                "Basic {$token}"
+            );
+        } elseif ($this->authStrategy === self::OAUTH) {
+            $token = $this->authOptions['access_token'];
+            $request = $request->withAddedHeader(
+                'Authorization',
+                "Bearer {$token}"
+            );
+        } else {
+            throw new AuthenticationException('Please set authentication to send requests.');
+        }
+
+        return [
+            $request,
+            $requestOptions
+        ];
+    }
+
+    /**
      * Get the Auth Strategy
      * 
      * @return  String
