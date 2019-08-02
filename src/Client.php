@@ -230,7 +230,10 @@ class Client
      */
     public function setOAuth() : void
     {
-        $response = OAuth::get(
+        $oauth = new OAuth;
+        $oauth->setEndpoint($this->authParams['endpoint']);
+
+        $response = $oauth->get(
             new HttpClient(),
             $this->getUrl(),
             $this->getAuthParams()

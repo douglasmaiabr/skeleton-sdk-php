@@ -10,6 +10,11 @@ use JustSteveKing\SDK\Exceptions\APIResponseException;
 class OAuth
 {
     /**
+     * @var String
+     */
+    protected $endpoint = 'oauth/token';
+
+    /**
      * Requests for an access token
      *
      * @param   Client      $client
@@ -19,9 +24,10 @@ class OAuth
      * @return  object
      * @throws  APIResponseException
      */
-    public static function get(Client $client, String $domain, array $params) : object
+    public function get(Client $client, String $domain, array $params) : object
     {
-        $authUrl = "$domain/oauth/token";
+        $endpoint = $this->getEndpoint();
+        $authUrl = "$domain/$endpoint";
 
         $params = array_merge([
             'grant_type' => 'password',
@@ -44,5 +50,27 @@ class OAuth
         }
 
         return json_decode($response->getBody()->getContents());
+    }
+
+    /**
+     * Set the OAuth endpoint
+     * 
+     * @param   String  $endpoint
+     * 
+     * @return  void
+     */
+    public function setEndpoint(String $endpoint) : void
+    {
+        $this->endpoint = $endpoint;
+    }
+
+    /**
+     * Get the OAuth endpoint
+     * 
+     * @return  null|String
+     */
+    public function getEndpoint() :? String
+    {
+        return $this->endpoint;
     }
 }

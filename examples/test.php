@@ -15,6 +15,7 @@ $config = [
     'client_secret' => getenv('CLIENT_SECRET'),
     'username' => getenv('USERNAME'),
     'password' => getenv('PASSWORD'),
+    'endpoint' => getenv('OAUTH_ENDPOINT')
 ];
 
 $client = new Client($config);
